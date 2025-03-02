@@ -2,14 +2,14 @@ group 'com.example.imagegallerysaver'
 version '1.0-SNAPSHOT'
 
 buildscript {
-    ext.kotlin_version = '1.9.21'
+    ext.kotlin_version = '1.9.21'  // Kotlin バージョン
     repositories {
         google()
         mavenCentral()
     }
 
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.3.0'
+        classpath 'com.android.tools.build:gradle:8.2.2'  // Gradle バージョンを最新化
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
     }
 }
@@ -26,14 +26,22 @@ apply plugin: 'kotlin-android'
 
 android {
     namespace "com.example.imagegallerysaver"
-    compileSdkVersion 30
+    compileSdkVersion 34  // 最新の Flutter に適合
 
     sourceSets {
         main.java.srcDirs += 'src/main/kotlin'
     }
     defaultConfig {
-        minSdkVersion 16
+        minSdkVersion 21  // minSdk を少し上げる
+        targetSdkVersion 34  // targetSdk を最新化
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"  // JVM ターゲットを適切に設定
     }
     lintOptions {
         disable 'InvalidPackage'
@@ -41,5 +49,5 @@ android {
 }
 
 dependencies {
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"  // jdk7 ではなく kotlin-stdlib
 }
